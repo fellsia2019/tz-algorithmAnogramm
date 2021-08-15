@@ -1,40 +1,35 @@
-const MODULE_ALGORITH_ANOGRAMM = (() => {
-	const arr = ["Tokyo", "London", "Rome", "Donlon", "Kyoto", "Paris", "Lonnod"]
+const arr = ["Tokyo", "London", "Rome", "Donlon", "Kyoto", "Paris", "Lonnod"]
 
-	const algorithmAnogrammGroup = (arr) => {
-		const newArray = []
-		const resultArray = new Map()
-		const indexOfAll = (word) => {
-			const indices = []
-			let idx = newArray.indexOf(word)
-			while (idx != -1) {
-				indices.push(idx)
-				idx = newArray.indexOf(word, idx + 1)
-			}
-
-			const groupArray = []
-
-			indices.forEach((item) => {
-				groupArray.push(arr[item])
-			})
-
-			resultArray.set(word, groupArray)
+const algorithmAnogrammGroup = (arr) => {
+	const newArray = []
+	const resultArray = new Map()
+	const indexOfAll = (word) => {
+		const indices = []
+		let idx = newArray.indexOf(word)
+		while (idx != -1) {
+			indices.push(idx)
+			idx = newArray.indexOf(word, idx + 1)
 		}
-		arr.forEach((item) => {
-			const sorted = item.toLowerCase().split("").sort().join("")
 
-			newArray.push(sorted)
-		})
-		newArray.forEach((sortedItem) => {
-			indexOfAll(sortedItem)
+		const groupArray = []
+
+		indices.forEach((item) => {
+			groupArray.push(arr[item])
 		})
 
-		console.log(Array.from(resultArray.values()))
-
-		return Array.from(resultArray.values())
+		resultArray.set(word, groupArray)
 	}
-	algorithmAnogrammGroup(arr)
-})()
+	arr.forEach((item) => {
+		const sorted = item.toLowerCase().split("").sort().join("")
 
-// IIFE использовал для примера, если используется паттерн проктиерования Module,
-// В действительно, в данном случае, это не имеет необходимости
+		newArray.push(sorted)
+	})
+	newArray.forEach((sortedItem) => {
+		indexOfAll(sortedItem)
+	})
+
+	console.log(Array.from(resultArray.values()))
+
+	return Array.from(resultArray.values())
+}
+algorithmAnogrammGroup(arr)
